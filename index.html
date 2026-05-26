@@ -213,8 +213,8 @@
   <div id="compliment"><span id="comp-text"></span></div>
 
   <div id="fallhint">
-    <div class="fh-text">Oops, you slipped down! 🌸<br>Walk back <b>◀</b> to the very beginning, then climb up again 💗</div>
-    <button class="fh-btn" id="restart-btn">↺ Start over</button>
+    <div class="fh-text">Oh no, you fell down! 🌸<br>Go back <b>◀</b> to the very beginning and start over to climb again 💗</div>
+    <button class="fh-btn" id="restart-btn">↺ Start from the beginning</button>
   </div>
 
   <div id="touch">
@@ -482,8 +482,8 @@
     // ----- fall-from-height detection -----
     if(player.onGround){
       const fallDist = player.y - airMinY;        // how far she dropped from her peak
-      if(landedGround && fallDist > 240 && player.x > 420 && player.x < LEVEL_W - 420){
-        showFallHint();
+      if(landedGround && fallDist > 180 && player.x > 200){
+        showFallHint();                            // she slipped off a high platform
       } else if(landedPlatform){
         hideFallHint();                            // she made it back up
       }
@@ -491,7 +491,7 @@
     } else {
       if(player.y < airMinY) airMinY = player.y;   // track highest point while airborne
     }
-    if(player.x < 320) hideFallHint();             // back at the start, clear hint
+    if(player.x < 200) hideFallHint();             // back at the very start, clear hint
 
     if(player.onGround && player.vx!==0) player.runPhase += 0.3;
     else if(!player.onGround) player.runPhase += 0.05;
